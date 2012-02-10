@@ -1,3 +1,4 @@
+
 typedef enum {
 	DirectionLeft,
 	DirectionRight

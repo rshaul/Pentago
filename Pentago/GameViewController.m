@@ -17,7 +17,6 @@
 @implementation GameViewController
 @synthesize board = _board;
 @synthesize grids = _grids;
-@synthesize gridAnimate = _gridAnimate;
 @synthesize label = _label;
 @synthesize state = _state;
 @synthesize turn = _turn;
@@ -25,7 +24,6 @@
 -(void)dealloc {
 	self.board = nil;
 	self.grids = nil;
-	self.gridAnimate = nil;
 	self.label = nil;
 	[super dealloc];
 }
@@ -41,8 +39,9 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor darkGrayColor];
+	self.view.backgroundColor = [UIColor blackColor];
 	self.board = [[[Board alloc] init] autorelease];
+	
 	GridView *grid0 = [GridView gridWithPosition:GRID0_POS tag:0];
 	GridView *grid1 = [GridView gridWithPosition:GRID1_POS tag:1];
 	GridView *grid2 = [GridView gridWithPosition:GRID2_POS tag:2];
@@ -52,32 +51,52 @@
 		grid.delegate = self;
 		[self.view addSubview:grid];
 	}
+	
 	self.label = [[[UILabel alloc] initWithFrame:LABEL_FRAME] autorelease];
 	self.label.backgroundColor = [UIColor clearColor];
 	self.label.textAlignment = UITextAlignmentCenter;
 	self.label.font = [UIFont systemFontOfSize:40];
 	self.label.textColor = [UIColor lightGrayColor];
 	[self.view addSubview:self.label];
+	
 	[self resetGame];
 }
 
--(void)setState:(GameState)state {
-	_state = state;
+// Changing game state updates the label
+
+-(void)updateLabel {
 	NSString *player = (self.turn == Player1) ? @"Red" : @"Blue";
-	if (state == GameStatePlace) {
+	if (self.state == GameStatePlace) {
 		self.label.text = [player stringByAppendingString:@" : place a piece"];
 	} else {
 		self.label.text = [player stringByAppendingString:@" : rotate a board"];
-	}
+	}	
+}
+-(void)setState:(GameState)state {
+	_state = state;
+	[self updateLabel];
+}
+-(void)setTurn:(Player)turn {
+	_turn = turn;
+	[self updateLabel];
 }
 
+// Handle Win Conditions
+
 -(void)gameOver:(NSString *)message {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message
+													message:nil
+												   delegate:self
+										  cancelButtonTitle:@"Ok"
+										  otherButtonTitles:nil];
 	[alert show];
 	[alert release];
 }
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	[self resetGame];
+}
 
--(void)handleWinner:(Winner)winner {
+-(BOOL)handleWinner:(Winner)winner {
 	switch (winner) {
 		case WinnerPlayer1:
 			[self gameOver:@"Red Wins!"];
@@ -89,19 +108,18 @@
 			[self gameOver:@"Draw"];
 			break;
 		case WinnerTie:
-			[self gameOver:@"Tie"];
+			[self gameOver:@"Tie - Everyone is a winner!"];
 			break;
 		case WinnerNone:
 			break;
 	}
+	return (winner != WinnerNone);
 }
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	[self resetGame];
-}
+// Placing a piece
 
--(Position)boardPosition:(Position)viewPosition grid:(GridView*)grid {
-	Position boardPosition = viewPosition;
+-(Position)offsetGridPosition:(Position)gridPosition grid:(GridView*)grid {
+	Position boardPosition = gridPosition;
 	if (grid.tag == 1 || grid.tag == 3) boardPosition.column += grid.Length;
 	if (grid.tag == 2 || grid.tag == 3) boardPosition.row += grid.Length;
 	return boardPosition;
@@ -110,56 +128,41 @@
 -(void)gridView:(GridView *)grid didTouchPosition:(Position)gridPosition {
 	if (self.state != GameStatePlace) return;
 	
-	Position boardPosition = [self boardPosition:gridPosition grid:grid];
+	Position boardPosition = [self offsetGridPosition:gridPosition grid:grid];
 	
-	if (self.state == GameStatePlace && [self.board playerAt:boardPosition] == PlayerNone) {
+	if ([self.board playerAt:boardPosition] == PlayerNone) {
 		[grid setPlayer:self.turn at:gridPosition];
 		[self.board setPlayer:self.turn at:boardPosition];
-		self.state = GameStateRotate;
-		[self handleWinner:[self.board winnerAt:boardPosition]];
+		if (![self handleWinner:[self.board winnerAt:boardPosition]]) {
+			self.state = GameStateRotate;
+		}
 	}
 }
 
--(void)setGridPiecesFromBoard:(GridView *)grid {
-	for (int row = 0; row < grid.Length; row++) {
-		for (int col = 0; col < grid.Length; col++) {
-			Position viewPosition = PositionMake(row, col);
-			Position boardPosition = [self boardPosition:viewPosition grid:grid];
-			Player player = [self.board playerAt:boardPosition];
-			[grid setPlayer:player at:viewPosition];
+// Rotating a board
+
+-(void)updateBoardFromGrid:(GridView *)grid {
+	for (int row=0; row < grid.Length; row++) {
+		for (int col=0; col < grid.Length; col++) {
+			Position gridPosition = PositionMake(row, col);
+			Position boardPosition = [self offsetGridPosition:gridPosition grid:grid];
+			Player player = [grid playerAt:gridPosition];
+			[self.board setPlayer:player at:boardPosition];
 		}
 	}
 }
 
 -(void)gridView:(GridView *)grid didSwipe:(Direction)direction {
-	if (self.state != GameStateRotate) return;
-	
-	grid.hidden = YES;
-	
-	self.gridAnimate = [GridView gridWithPosition:grid.frame.origin tag:grid.tag];
-	[self setGridPiecesFromBoard:self.gridAnimate];
-	
-	[self.board rotateGrid:grid.tag direction:direction];
-	[self setGridPiecesFromBoard:grid];
-	
-	[self.view addSubview:self.gridAnimate];
+	if (self.state != GameStateRotate) return;	
+	[grid rotate:direction];
 	self.state = GameStateNoInput;
-	
-	CGFloat angle = (direction == DirectionRight) ? M_PI_2 : -M_PI_2;
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(animationDidStop)];
-	self.gridAnimate.transform = CGAffineTransformMakeRotation(angle);
-	[UIView commitAnimations];
 }
-
--(void)animationDidStop {
-	[[self.grids objectAtIndex:self.gridAnimate.tag] setHidden:NO];
-	[self.gridAnimate removeFromSuperview];
-	self.turn = (self.turn == Player1) ? Player2 : Player1;
-	self.state = GameStatePlace;
-	[self handleWinner:[self.board winnerAtGrid:self.gridAnimate.tag]];
-	self.gridAnimate = nil;
+-(void)gridViewRotateDidStop:(GridView *)grid {
+	[self updateBoardFromGrid:grid];
+	if (![self handleWinner:[self.board winnerAtGrid:grid.tag]]) {
+		self.turn = (self.turn == Player1) ? Player2 : Player1;
+		self.state = GameStatePlace;
+	}
 }
 
 @end

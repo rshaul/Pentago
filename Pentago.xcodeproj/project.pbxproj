@@ -13,22 +13,15 @@
 		3F8FD18614E35E4E00C7206B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD18414E35E4E00C7206B /* InfoPlist.strings */; };
 		3F8FD18814E35E4E00C7206B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD18714E35E4E00C7206B /* main.m */; };
 		3F8FD18C14E35E4E00C7206B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD18B14E35E4E00C7206B /* AppDelegate.m */; };
-		3F8FD19314E35EBE00C7206B /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19214E35EBE00C7206B /* grid.png */; };
-		3F8FD19C14E35EDE00C7206B /* blueMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19414E35EDE00C7206B /* blueMarble.png */; };
-		3F8FD19D14E35EDE00C7206B /* grayMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19514E35EDE00C7206B /* grayMarble.png */; };
-		3F8FD19E14E35EDE00C7206B /* greenMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19614E35EDE00C7206B /* greenMarble.png */; };
-		3F8FD19F14E35EDE00C7206B /* pinkMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19714E35EDE00C7206B /* pinkMarble.png */; };
-		3F8FD1A014E35EDE00C7206B /* purpleMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19814E35EDE00C7206B /* purpleMarble.png */; };
-		3F8FD1A114E35EDE00C7206B /* redMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19914E35EDE00C7206B /* redMarble.png */; };
-		3F8FD1A214E35EDE00C7206B /* tealMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19A14E35EDE00C7206B /* tealMarble.png */; };
-		3F8FD1A314E35EDE00C7206B /* yellowMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19B14E35EDE00C7206B /* yellowMarble.png */; };
 		3F8FD1A714E35F1F00C7206B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD1A614E35F1F00C7206B /* GameViewController.m */; };
 		3F8FD1AA14E35F6B00C7206B /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD1A914E35F6B00C7206B /* GridView.m */; };
 		3FC82C1914E48EEB006EA058 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82C1814E48EEB006EA058 /* Board.m */; };
 		3FC82C1C14E48F36006EA058 /* Player.h in Resources */ = {isa = PBXBuildFile; fileRef = 3FC82C1B14E48F36006EA058 /* Player.h */; };
+		E3668EF014E5C7C5006AC992 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E3668EEE14E5C7C5006AC992 /* blue.png */; };
+		E3668EF114E5C7C5006AC992 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = E3668EEF14E5C7C5006AC992 /* red.png */; };
 		E3A1E20A14E4DA4E0003D0F4 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A1E20914E4DA4E0003D0F4 /* Cell.m */; };
 		E3A1E21014E50B260003D0F4 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A1E20F14E50B250003D0F4 /* Position.m */; };
-		E3A1E21214E50F470003D0F4 /* grid300.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A1E21114E50F470003D0F4 /* grid300.png */; };
+		E3A1E21214E50F470003D0F4 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A1E21114E50F470003D0F4 /* grid.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,15 +35,6 @@
 		3F8FD18914E35E4E00C7206B /* Pentago-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pentago-Prefix.pch"; sourceTree = "<group>"; };
 		3F8FD18A14E35E4E00C7206B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3F8FD18B14E35E4E00C7206B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3F8FD19214E35EBE00C7206B /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
-		3F8FD19414E35EDE00C7206B /* blueMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueMarble.png; sourceTree = "<group>"; };
-		3F8FD19514E35EDE00C7206B /* grayMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayMarble.png; sourceTree = "<group>"; };
-		3F8FD19614E35EDE00C7206B /* greenMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenMarble.png; sourceTree = "<group>"; };
-		3F8FD19714E35EDE00C7206B /* pinkMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinkMarble.png; sourceTree = "<group>"; };
-		3F8FD19814E35EDE00C7206B /* purpleMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleMarble.png; sourceTree = "<group>"; };
-		3F8FD19914E35EDE00C7206B /* redMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redMarble.png; sourceTree = "<group>"; };
-		3F8FD19A14E35EDE00C7206B /* tealMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tealMarble.png; sourceTree = "<group>"; };
-		3F8FD19B14E35EDE00C7206B /* yellowMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowMarble.png; sourceTree = "<group>"; };
 		3F8FD1A514E35F1F00C7206B /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		3F8FD1A614E35F1F00C7206B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		3F8FD1A814E35F6B00C7206B /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
@@ -59,13 +43,15 @@
 		3FC82C1814E48EEB006EA058 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 		3FC82C1B14E48F36006EA058 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		E32C94F314E5B46A00DA3237 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
+		E3668EEE14E5C7C5006AC992 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
+		E3668EEF14E5C7C5006AC992 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		E3A1E20814E4DA4E0003D0F4 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		E3A1E20914E4DA4E0003D0F4 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		E3A1E20C14E4DAA60003D0F4 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
 		E3A1E20D14E4E0F80003D0F4 /* Winner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Winner.h; sourceTree = "<group>"; };
 		E3A1E20E14E504B70003D0F4 /* GridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewDelegate.h; sourceTree = "<group>"; };
 		E3A1E20F14E50B250003D0F4 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Position.m; sourceTree = "<group>"; };
-		E3A1E21114E50F470003D0F4 /* grid300.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid300.png; sourceTree = "<group>"; };
+		E3A1E21114E50F470003D0F4 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,16 +121,9 @@
 		3F8FD1A414E35EE400C7206B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E3A1E21114E50F470003D0F4 /* grid300.png */,
-				3F8FD19414E35EDE00C7206B /* blueMarble.png */,
-				3F8FD19514E35EDE00C7206B /* grayMarble.png */,
-				3F8FD19614E35EDE00C7206B /* greenMarble.png */,
-				3F8FD19714E35EDE00C7206B /* pinkMarble.png */,
-				3F8FD19814E35EDE00C7206B /* purpleMarble.png */,
-				3F8FD19914E35EDE00C7206B /* redMarble.png */,
-				3F8FD19A14E35EDE00C7206B /* tealMarble.png */,
-				3F8FD19B14E35EDE00C7206B /* yellowMarble.png */,
-				3F8FD19214E35EBE00C7206B /* grid.png */,
+				E3A1E21114E50F470003D0F4 /* grid.png */,
+				E3668EEE14E5C7C5006AC992 /* blue.png */,
+				E3668EEF14E5C7C5006AC992 /* red.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -237,17 +216,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F8FD18614E35E4E00C7206B /* InfoPlist.strings in Resources */,
-				3F8FD19314E35EBE00C7206B /* grid.png in Resources */,
-				3F8FD19C14E35EDE00C7206B /* blueMarble.png in Resources */,
-				3F8FD19D14E35EDE00C7206B /* grayMarble.png in Resources */,
-				3F8FD19E14E35EDE00C7206B /* greenMarble.png in Resources */,
-				3F8FD19F14E35EDE00C7206B /* pinkMarble.png in Resources */,
-				3F8FD1A014E35EDE00C7206B /* purpleMarble.png in Resources */,
-				3F8FD1A114E35EDE00C7206B /* redMarble.png in Resources */,
-				3F8FD1A214E35EDE00C7206B /* tealMarble.png in Resources */,
-				3F8FD1A314E35EDE00C7206B /* yellowMarble.png in Resources */,
 				3FC82C1C14E48F36006EA058 /* Player.h in Resources */,
-				E3A1E21214E50F470003D0F4 /* grid300.png in Resources */,
+				E3A1E21214E50F470003D0F4 /* grid.png in Resources */,
+				E3668EF014E5C7C5006AC992 /* blue.png in Resources */,
+				E3668EF114E5C7C5006AC992 /* red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

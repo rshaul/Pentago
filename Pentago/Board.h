@@ -13,7 +13,8 @@
 #import "Direction.h"
 #import "Winner.h"
 
-// Enumerates over the cells
+// The complete 6x6 game board
+// Used to check for wins
 @interface Board : NSObject <NSFastEnumeration>
 
 @property (nonatomic, readonly) int Length;
@@ -22,8 +23,6 @@
 -(Player)playerAt:(Position)position;
 -(void)setPlayer:(Player)player at:(Position)position;
 -(void)clearBoard;
-
--(void)rotateGrid:(int)grid direction:(Direction)direction;
 
 -(Winner)winnerAt:(Position)position;
 -(Winner)winnerAtGrid:(int)grid;

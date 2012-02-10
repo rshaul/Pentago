@@ -15,4 +15,5 @@
 @protocol GridViewDelegate <NSObject>
 -(void)gridView:(GridView*)grid didTouchPosition:(Position)position;
 -(void)gridView:(GridView*)grid didSwipe:(Direction)direction;
+-(void)gridViewRotateDidStop:(GridView*)grid;
 @end

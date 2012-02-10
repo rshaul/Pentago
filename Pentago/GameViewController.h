@@ -20,7 +20,6 @@ typedef enum {
 
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) NSArray *grids;
-@property (nonatomic, retain) GridView *gridAnimate;
 @property (nonatomic, retain) UILabel *label;
 @property (nonatomic, assign) GameState state;
 @property (nonatomic, assign) Player turn;

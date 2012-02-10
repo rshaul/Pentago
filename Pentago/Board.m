@@ -43,21 +43,11 @@
 	return 6;
 }
 
--(Cell*)cellAtRow:(int)row column:(int)column {
-	return [self.cells objectAtIndex:(row*self.Length+column)];
-}
--(Cell*)cellAt:(Position)position {
-	return [self cellAtRow:position.row column:position.column];
-}
-
--(Player)playerAtRow:(int)row column:(int)column {
-	return [[self cellAtRow:row column:column] player];
+-(Cell*)cellAt:(Position)p {
+	return [self.cells objectAtIndex:(p.row*self.Length+p.column)];
 }
 -(Player)playerAt:(Position)position {
 	return [[self cellAt:position] player];
-}
--(void)setPlayer:(Player)player atRow:(int)row column:(int)column {
-	[[self cellAtRow:row column:column] setPlayer:player];
 }
 -(void)setPlayer:(Player)player at:(Position)position {
 	[[self cellAt:position] setPlayer:player];
@@ -68,36 +58,9 @@
 	}
 }
 
-/*
-	Rotations
-*/
 
--(void)rotateGrid:(int)grid direction:(Direction)direction {
-	int size = 3;
-	int rowOff = (grid == 2 || grid == 3) ? size : 0;
-	int colOff = (grid == 1 || grid == 3) ? size : 0;
-	Board *copy = [Board copyBoard:self];
-	for (int row = 0; row < size; row++) {
-		for (int col = 0; col < size; col++) {
-			int rotateRow = col;
-			int rotateCol = row;
-			if (direction == DirectionLeft) {
-				rotateRow = (size-1) - rotateRow;
-			} else if (direction == DirectionRight) {
-				rotateCol = (size-1) - rotateCol;
-			}
-			Player player = [copy playerAtRow:row+rowOff column:col+colOff];
-			[self setPlayer:player atRow:rotateRow+rowOff column:rotateCol+colOff];
-		}
-	}
-	[copy release];
-}
- 
+// Determining the winner
 
-
-/*
-	Determining the winner
-*/
 int max(int,int);
 int max(int a, int b) {
 	return (a > b) ? a : b;
@@ -122,7 +85,7 @@ int min(int a, int b) {
 	// Check Column
 	count = 0;
 	for (row=0; row < self.Length; row++) {
-		if ([self playerAtRow:row column:pColumn] == player) count++;
+		if ([self playerAt:PositionMake(row, pColumn)] == player) count++;
 		else count = 0;
 		if (count == WinCount) return YES;
 	}
@@ -130,7 +93,7 @@ int min(int a, int b) {
 	// Check Row
 	count = 0;
 	for (col=0; col < self.Length; col++) {
-		if ([self playerAtRow:pRow column:col] == player) count++;
+		if ([self playerAt:PositionMake(pRow, col)] == player) count++;
 		else count = 0;
 		if (count == WinCount) return YES;
 	}
@@ -140,7 +103,7 @@ int min(int a, int b) {
 	col = max(pColumn - pRow, 0);
 	row = pRow - (pColumn - col);
 	while (row < self.Length && col < self.Length) {
-		if ([self playerAtRow:row column:col] == player) count++;
+		if ([self playerAt:PositionMake(row, col)] == player) count++;
 		else count = 0;
 		if (count == WinCount) return YES;
 		row++;
@@ -152,7 +115,7 @@ int min(int a, int b) {
 	col = min(pColumn + pRow, self.Length-1);
 	row = pRow - (col - pColumn);
 	while (row < self.Length && col >= 0) {
-		if ([self playerAtRow:row column:col] == player) count++;
+		if ([self playerAt:PositionMake(row, col)] == player) count++;
 		else count = 0;
 		if (count == WinCount) return YES;
 		row++;
@@ -176,11 +139,12 @@ int min(int a, int b) {
 	return [self getWinnerP1:p1 p2:p2];
 }
 
-// Check for a winner along the edges of a grid
+// Check for a winner along the edge of a grid
+
 -(Winner)winnerAtGrid:(int)grid {
 	int count = 5;
 	Position *positions = malloc(count*sizeof(Position));
-	// Positions for grid 0
+	// Edge positions for grid 0
 	positions[0] = PositionMake(0, 2);
 	positions[1] = PositionMake(1, 2);
 	positions[2] = PositionMake(2, 2);
@@ -196,7 +160,7 @@ int min(int a, int b) {
 			positions[i].row = (self.Length-1) - positions[i].row;
 		}
 	}
-	// Check for winners along the edges
+	// Check for winners along the edge
 	BOOL p1 = NO;
 	BOOL p2 = NO;
 	for (int i=0; i < count; i++) {
@@ -208,9 +172,8 @@ int min(int a, int b) {
 	return [self getWinnerP1:p1 p2:p2];
 }
 
-/*
-	NSFastEnumeration Protocol
-*/
+// NSFastEnumeration Protocol
+
 -(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id [])buffer count:(NSUInteger)len {
 	return [self.cells countByEnumeratingWithState:state objects:buffer count:len];
 }
