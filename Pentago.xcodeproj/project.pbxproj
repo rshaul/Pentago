@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F8FD17C14E35E4E00C7206B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8FD17B14E35E4E00C7206B /* UIKit.framework */; };
+		3F8FD17E14E35E4E00C7206B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8FD17D14E35E4E00C7206B /* Foundation.framework */; };
+		3F8FD18014E35E4E00C7206B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8FD17F14E35E4E00C7206B /* CoreGraphics.framework */; };
+		3F8FD18614E35E4E00C7206B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD18414E35E4E00C7206B /* InfoPlist.strings */; };
+		3F8FD18814E35E4E00C7206B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD18714E35E4E00C7206B /* main.m */; };
+		3F8FD18C14E35E4E00C7206B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD18B14E35E4E00C7206B /* AppDelegate.m */; };
+		3F8FD19314E35EBE00C7206B /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19214E35EBE00C7206B /* grid.png */; };
+		3F8FD19C14E35EDE00C7206B /* blueMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19414E35EDE00C7206B /* blueMarble.png */; };
+		3F8FD19D14E35EDE00C7206B /* grayMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19514E35EDE00C7206B /* grayMarble.png */; };
+		3F8FD19E14E35EDE00C7206B /* greenMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19614E35EDE00C7206B /* greenMarble.png */; };
+		3F8FD19F14E35EDE00C7206B /* pinkMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19714E35EDE00C7206B /* pinkMarble.png */; };
+		3F8FD1A014E35EDE00C7206B /* purpleMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19814E35EDE00C7206B /* purpleMarble.png */; };
+		3F8FD1A114E35EDE00C7206B /* redMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19914E35EDE00C7206B /* redMarble.png */; };
+		3F8FD1A214E35EDE00C7206B /* tealMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19A14E35EDE00C7206B /* tealMarble.png */; };
+		3F8FD1A314E35EDE00C7206B /* yellowMarble.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8FD19B14E35EDE00C7206B /* yellowMarble.png */; };
+		3F8FD1A714E35F1F00C7206B /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD1A614E35F1F00C7206B /* GameViewController.m */; };
+		3F8FD1AA14E35F6B00C7206B /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FD1A914E35F6B00C7206B /* GridView.m */; };
+		3FC82C1914E48EEB006EA058 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82C1814E48EEB006EA058 /* Board.m */; };
+		3FC82C1C14E48F36006EA058 /* Player.h in Resources */ = {isa = PBXBuildFile; fileRef = 3FC82C1B14E48F36006EA058 /* Player.h */; };
+		E3A1E20A14E4DA4E0003D0F4 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A1E20914E4DA4E0003D0F4 /* Cell.m */; };
+		E3A1E21014E50B260003D0F4 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A1E20F14E50B250003D0F4 /* Position.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3F8FD17714E35E4E00C7206B /* Pentago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pentago.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F8FD17B14E35E4E00C7206B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3F8FD17D14E35E4E00C7206B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3F8FD17F14E35E4E00C7206B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3F8FD18314E35E4E00C7206B /* Pentago-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pentago-Info.plist"; sourceTree = "<group>"; };
+		3F8FD18514E35E4E00C7206B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3F8FD18714E35E4E00C7206B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3F8FD18914E35E4E00C7206B /* Pentago-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pentago-Prefix.pch"; sourceTree = "<group>"; };
+		3F8FD18A14E35E4E00C7206B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3F8FD18B14E35E4E00C7206B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3F8FD19214E35EBE00C7206B /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
+		3F8FD19414E35EDE00C7206B /* blueMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueMarble.png; sourceTree = "<group>"; };
+		3F8FD19514E35EDE00C7206B /* grayMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayMarble.png; sourceTree = "<group>"; };
+		3F8FD19614E35EDE00C7206B /* greenMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenMarble.png; sourceTree = "<group>"; };
+		3F8FD19714E35EDE00C7206B /* pinkMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinkMarble.png; sourceTree = "<group>"; };
+		3F8FD19814E35EDE00C7206B /* purpleMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleMarble.png; sourceTree = "<group>"; };
+		3F8FD19914E35EDE00C7206B /* redMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redMarble.png; sourceTree = "<group>"; };
+		3F8FD19A14E35EDE00C7206B /* tealMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tealMarble.png; sourceTree = "<group>"; };
+		3F8FD19B14E35EDE00C7206B /* yellowMarble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowMarble.png; sourceTree = "<group>"; };
+		3F8FD1A514E35F1F00C7206B /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		3F8FD1A614E35F1F00C7206B /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		3F8FD1A814E35F6B00C7206B /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
+		3F8FD1A914E35F6B00C7206B /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
+		3FC82C1714E48EEB006EA058 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		3FC82C1814E48EEB006EA058 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
+		3FC82C1B14E48F36006EA058 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		E3A1E20814E4DA4E0003D0F4 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		E3A1E20914E4DA4E0003D0F4 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		E3A1E20C14E4DAA60003D0F4 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
+		E3A1E20D14E4E0F80003D0F4 /* Winner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Winner.h; sourceTree = "<group>"; };
+		E3A1E20E14E504B70003D0F4 /* GridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewDelegate.h; sourceTree = "<group>"; };
+		E3A1E20F14E50B250003D0F4 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Position.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F8FD17414E35E4E00C7206B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F8FD17C14E35E4E00C7206B /* UIKit.framework in Frameworks */,
+				3F8FD17E14E35E4E00C7206B /* Foundation.framework in Frameworks */,
+				3F8FD18014E35E4E00C7206B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F8FD16C14E35E4E00C7206B = {
+			isa = PBXGroup;
+			children = (
+				3F8FD18114E35E4E00C7206B /* Pentago */,
+				3F8FD17A14E35E4E00C7206B /* Frameworks */,
+				3F8FD17814E35E4E00C7206B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F8FD17814E35E4E00C7206B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FD17714E35E4E00C7206B /* Pentago.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F8FD17A14E35E4E00C7206B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FD17B14E35E4E00C7206B /* UIKit.framework */,
+				3F8FD17D14E35E4E00C7206B /* Foundation.framework */,
+				3F8FD17F14E35E4E00C7206B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F8FD18114E35E4E00C7206B /* Pentago */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FD1AD14E361C000C7206B /* Controller */,
+				3F8FD1AC14E361A500C7206B /* Model */,
+				3F8FD1AB14E3619B00C7206B /* View */,
+				3F8FD1A414E35EE400C7206B /* Images */,
+				3F8FD18214E35E4E00C7206B /* Supporting Files */,
+			);
+			path = Pentago;
+			sourceTree = "<group>";
+		};
+		3F8FD18214E35E4E00C7206B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FD18314E35E4E00C7206B /* Pentago-Info.plist */,
+				3F8FD18414E35E4E00C7206B /* InfoPlist.strings */,
+				3F8FD18714E35E4E00C7206B /* main.m */,
+				3F8FD18914E35E4E00C7206B /* Pentago-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3F8FD1A414E35EE400C7206B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FD19414E35EDE00C7206B /* blueMarble.png */,
+				3F8FD19514E35EDE00C7206B /* grayMarble.png */,
+				3F8FD19614E35EDE00C7206B /* greenMarble.png */,
+				3F8FD19714E35EDE00C7206B /* pinkMarble.png */,
+				3F8FD19814E35EDE00C7206B /* purpleMarble.png */,
+				3F8FD19914E35EDE00C7206B /* redMarble.png */,
+				3F8FD19A14E35EDE00C7206B /* tealMarble.png */,
+				3F8FD19B14E35EDE00C7206B /* yellowMarble.png */,
+				3F8FD19214E35EBE00C7206B /* grid.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		3F8FD1AB14E3619B00C7206B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E3A1E20E14E504B70003D0F4 /* GridViewDelegate.h */,
+				3F8FD1A814E35F6B00C7206B /* GridView.h */,
+				3F8FD1A914E35F6B00C7206B /* GridView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3F8FD1AC14E361A500C7206B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3A1E20D14E4E0F80003D0F4 /* Winner.h */,
+				3FC82C1B14E48F36006EA058 /* Player.h */,
+				E3A1E20C14E4DAA60003D0F4 /* Position.h */,
+				E3A1E20F14E50B250003D0F4 /* Position.m */,
+				3FC82C1714E48EEB006EA058 /* Board.h */,
+				3FC82C1814E48EEB006EA058 /* Board.m */,
+				E3A1E20814E4DA4E0003D0F4 /* Cell.h */,
+				E3A1E20914E4DA4E0003D0F4 /* Cell.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3F8FD1AD14E361C000C7206B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3F8FD1A514E35F1F00C7206B /* GameViewController.h */,
+				3F8FD1A614E35F1F00C7206B /* GameViewController.m */,
+				3F8FD18A14E35E4E00C7206B /* AppDelegate.h */,
+				3F8FD18B14E35E4E00C7206B /* AppDelegate.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F8FD17614E35E4E00C7206B /* Pentago */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F8FD18F14E35E4E00C7206B /* Build configuration list for PBXNativeTarget "Pentago" */;
+			buildPhases = (
+				3F8FD17314E35E4E00C7206B /* Sources */,
+				3F8FD17414E35E4E00C7206B /* Frameworks */,
+				3F8FD17514E35E4E00C7206B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pentago;
+			productName = Pentago;
+			productReference = 3F8FD17714E35E4E00C7206B /* Pentago.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F8FD16E14E35E4E00C7206B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 3F8FD17114E35E4E00C7206B /* Build configuration list for PBXProject "Pentago" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3F8FD16C14E35E4E00C7206B;
+			productRefGroup = 3F8FD17814E35E4E00C7206B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F8FD17614E35E4E00C7206B /* Pentago */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F8FD17514E35E4E00C7206B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F8FD18614E35E4E00C7206B /* InfoPlist.strings in Resources */,
+				3F8FD19314E35EBE00C7206B /* grid.png in Resources */,
+				3F8FD19C14E35EDE00C7206B /* blueMarble.png in Resources */,
+				3F8FD19D14E35EDE00C7206B /* grayMarble.png in Resources */,
+				3F8FD19E14E35EDE00C7206B /* greenMarble.png in Resources */,
+				3F8FD19F14E35EDE00C7206B /* pinkMarble.png in Resources */,
+				3F8FD1A014E35EDE00C7206B /* purpleMarble.png in Resources */,
+				3F8FD1A114E35EDE00C7206B /* redMarble.png in Resources */,
+				3F8FD1A214E35EDE00C7206B /* tealMarble.png in Resources */,
+				3F8FD1A314E35EDE00C7206B /* yellowMarble.png in Resources */,
+				3FC82C1C14E48F36006EA058 /* Player.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F8FD17314E35E4E00C7206B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F8FD18814E35E4E00C7206B /* main.m in Sources */,
+				3F8FD18C14E35E4E00C7206B /* AppDelegate.m in Sources */,
+				3F8FD1A714E35F1F00C7206B /* GameViewController.m in Sources */,
+				3F8FD1AA14E35F6B00C7206B /* GridView.m in Sources */,
+				3FC82C1914E48EEB006EA058 /* Board.m in Sources */,
+				E3A1E20A14E4DA4E0003D0F4 /* Cell.m in Sources */,
+				E3A1E21014E50B260003D0F4 /* Position.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3F8FD18414E35E4E00C7206B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F8FD18514E35E4E00C7206B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3F8FD18D14E35E4E00C7206B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		3F8FD18E14E35E4E00C7206B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3F8FD19014E35E4E00C7206B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pentago/Pentago-Prefix.pch";
+				INFOPLIST_FILE = "Pentago/Pentago-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3F8FD19114E35E4E00C7206B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pentago/Pentago-Prefix.pch";
+				INFOPLIST_FILE = "Pentago/Pentago-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F8FD17114E35E4E00C7206B /* Build configuration list for PBXProject "Pentago" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F8FD18D14E35E4E00C7206B /* Debug */,
+				3F8FD18E14E35E4E00C7206B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F8FD18F14E35E4E00C7206B /* Build configuration list for PBXNativeTarget "Pentago" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F8FD19014E35E4E00C7206B /* Debug */,
+				3F8FD19114E35E4E00C7206B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3F8FD16E14E35E4E00C7206B /* Project object */;
+}
