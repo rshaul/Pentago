@@ -2,8 +2,8 @@
 //  main.m
 //  Pentago
 //
-//  Created by student on 2/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Ryan Shaul on 2/8/12.
+//  Copyright (c) 2012 Ryan Shaul. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

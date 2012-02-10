@@ -2,8 +2,8 @@
 //  Board.h
 //  Pentago
 //
-//  Created by student on 2/9/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Ryan Shaul on 2/9/12.
+//  Copyright (c) 2012 Ryan Shaul. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,6 +20,8 @@
 
 -(Player)playerAt:(Position)position;
 -(void)setPlayer:(Player)player at:(Position)position;
+-(void)clearBoard;
+
 -(Winner)winnerAt:(Position)position;
 -(Winner)winnerAtGrid:(int)grid;
 

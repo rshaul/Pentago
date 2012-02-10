@@ -3,7 +3,7 @@
 //  Pentago
 //
 //  Created by Ryan Shaul on 2/9/12.
-//  Copyright (c) 2012 Allied Information Networks. All rights reserved.
+//  Copyright (c) 2012 Ryan Shaul. All rights reserved.
 //
 
 #import "Cell.h"

@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  Pentago
 //
-//  Created by student on 2/8/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Ryan Shaul on 2/8/12.
+//  Copyright (c) 2012 Ryan Shaul. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -20,6 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];
+	
+	GameViewController *gvc = [[GameViewController alloc] init];
+	self.window.rootViewController = gvc;
+	[gvc release];
+	
     [self.window makeKeyAndVisible];
     return YES;
 }
