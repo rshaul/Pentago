@@ -12,28 +12,27 @@
 #define GRID1_POS CGPointMake(397, 71)
 #define GRID2_POS CGPointMake(71, 397)
 #define GRID3_POS CGPointMake(397, 397)
+#define LABEL_FRAME CGRectMake(0, 750, 768, 100)
 
 @implementation GameViewController
 @synthesize board = _board;
-@synthesize grid0 = _grid0;
-@synthesize grid1 = _grid1;
-@synthesize grid2 = _grid2;
-@synthesize grid3 = _grid3;
 @synthesize grids = _grids;
+@synthesize gridAnimate = _gridAnimate;
+@synthesize label = _label;
+@synthesize state = _state;
 @synthesize turn = _turn;
 
 -(void)dealloc {
 	self.board = nil;
-	self.grid0 = nil;
-	self.grid1 = nil;
-	self.grid2 = nil;
-	self.grid3 = nil;
 	self.grids = nil;
+	self.gridAnimate = nil;
+	self.label = nil;
 	[super dealloc];
 }
 
 -(void)resetGame {
 	self.turn = Player1;
+	self.state = GameStatePlace;
 	for (GridView *grid in self.grids) {
 		[grid clearGrid];
 	}
@@ -44,16 +43,32 @@
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor darkGrayColor];
 	self.board = [[[Board alloc] init] autorelease];
-	self.grid0 = [GridView gridWithPosition:GRID0_POS];
-	self.grid1 = [GridView gridWithPosition:GRID1_POS];
-	self.grid2 = [GridView gridWithPosition:GRID2_POS];
-	self.grid3 = [GridView gridWithPosition:GRID3_POS];
-	self.grids = [NSArray arrayWithObjects:self.grid0, self.grid1, self.grid2, self.grid3, nil];
+	GridView *grid0 = [GridView gridWithPosition:GRID0_POS tag:0];
+	GridView *grid1 = [GridView gridWithPosition:GRID1_POS tag:1];
+	GridView *grid2 = [GridView gridWithPosition:GRID2_POS tag:2];
+	GridView *grid3 = [GridView gridWithPosition:GRID3_POS tag:3];
+	self.grids = [NSArray arrayWithObjects:grid0, grid1, grid2, grid3, nil];
 	for (GridView *grid in self.grids) {
 		grid.delegate = self;
 		[self.view addSubview:grid];
 	}
+	self.label = [[[UILabel alloc] initWithFrame:LABEL_FRAME] autorelease];
+	self.label.backgroundColor = [UIColor clearColor];
+	self.label.textAlignment = UITextAlignmentCenter;
+	self.label.font = [UIFont systemFontOfSize:40];
+	self.label.textColor = [UIColor lightGrayColor];
+	[self.view addSubview:self.label];
 	[self resetGame];
+}
+
+-(void)setState:(GameState)state {
+	_state = state;
+	NSString *player = (self.turn == Player1) ? @"Red" : @"Blue";
+	if (state == GameStatePlace) {
+		self.label.text = [player stringByAppendingString:@" : place a piece"];
+	} else {
+		self.label.text = [player stringByAppendingString:@" : rotate a board"];
+	}
 }
 
 -(void)gameOver:(NSString *)message {
@@ -62,38 +77,89 @@
 	[alert release];
 }
 
+-(void)handleWinner:(Winner)winner {
+	switch (winner) {
+		case WinnerPlayer1:
+			[self gameOver:@"Red Wins!"];
+			break;
+		case WinnerPlayer2:
+			[self gameOver:@"Blue Wins!"];
+			break;
+		case WinnerDraw:
+			[self gameOver:@"Draw"];
+			break;
+		case WinnerTie:
+			[self gameOver:@"Tie"];
+			break;
+		case WinnerNone:
+			break;
+	}
+}
+
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	[self resetGame];
 }
 
--(void)gridView:(GridView *)gridView didTouchPosition:(Position)viewPosition {
+-(Position)boardPosition:(Position)viewPosition grid:(GridView*)grid {
 	Position boardPosition = viewPosition;
-	if (gridView == self.grid1 || gridView == self.grid3) boardPosition.column += 3;
-	if (gridView == self.grid2 || gridView == self.grid3) boardPosition.row += 3;
-	
-	if ([self.board playerAt:boardPosition] == PlayerNone) {
-		[gridView setPlayer:self.turn at:viewPosition];
-		[self.board setPlayer:self.turn at:boardPosition];
-		Winner winner = [self.board winnerAt:boardPosition];
-		switch (winner) {
-			case WinnerPlayer1:
-				[self gameOver:@"Player 1 Wins!"];
-				break;
-			case WinnerPlayer2:
-				[self gameOver:@"Player 2 Wins!"];
-				break;
-			case WinnerDraw:
-				[self gameOver:@"Draw"];
-				break;
-			case WinnerTie:
-				[self gameOver:@"Tie"];
-				break;
-			case WinnerNone:
-				self.turn = (self.turn == Player1) ? Player2 : Player1;
-				break;
-		}
+	if (grid.tag == 1 || grid.tag == 3) boardPosition.column += grid.Length;
+	if (grid.tag == 2 || grid.tag == 3) boardPosition.row += grid.Length;
+	return boardPosition;
+}
 
+-(void)gridView:(GridView *)grid didTouchPosition:(Position)gridPosition {
+	if (self.state != GameStatePlace) return;
+	
+	Position boardPosition = [self boardPosition:gridPosition grid:grid];
+	
+	if (self.state == GameStatePlace && [self.board playerAt:boardPosition] == PlayerNone) {
+		[grid setPlayer:self.turn at:gridPosition];
+		[self.board setPlayer:self.turn at:boardPosition];
+		self.state = GameStateRotate;
+		[self handleWinner:[self.board winnerAt:boardPosition]];
 	}
+}
+
+-(void)setGridPiecesFromBoard:(GridView *)grid {
+	for (int row = 0; row < grid.Length; row++) {
+		for (int col = 0; col < grid.Length; col++) {
+			Position viewPosition = PositionMake(row, col);
+			Position boardPosition = [self boardPosition:viewPosition grid:grid];
+			Player player = [self.board playerAt:boardPosition];
+			[grid setPlayer:player at:viewPosition];
+		}
+	}
+}
+
+-(void)gridView:(GridView *)grid didSwipe:(Direction)direction {
+	if (self.state != GameStateRotate) return;
+	
+	grid.hidden = YES;
+	
+	self.gridAnimate = [GridView gridWithPosition:grid.frame.origin tag:grid.tag];
+	[self setGridPiecesFromBoard:self.gridAnimate];
+	
+	[self.board rotateGrid:grid.tag direction:direction];
+	[self setGridPiecesFromBoard:grid];
+	
+	[self.view addSubview:self.gridAnimate];
+	self.state = GameStateNoInput;
+	
+	CGFloat angle = (direction == DirectionRight) ? M_PI_2 : -M_PI_2;
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animationDidStop)];
+	self.gridAnimate.transform = CGAffineTransformMakeRotation(angle);
+	[UIView commitAnimations];
+}
+
+-(void)animationDidStop {
+	[[self.grids objectAtIndex:self.gridAnimate.tag] setHidden:NO];
+	[self.gridAnimate removeFromSuperview];
+	self.turn = (self.turn == Player1) ? Player2 : Player1;
+	self.state = GameStatePlace;
+	[self handleWinner:[self.board winnerAtGrid:self.gridAnimate.tag]];
+	self.gridAnimate = nil;
 }
 
 @end

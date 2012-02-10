@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Position.h"
+#import "Direction.h"
 
 @class GridView;
 
 @protocol GridViewDelegate <NSObject>
--(void)gridView:(GridView*)gridView didTouchPosition:(Position)position;
+-(void)gridView:(GridView*)grid didTouchPosition:(Position)position;
+-(void)gridView:(GridView*)grid didSwipe:(Direction)direction;
 @end

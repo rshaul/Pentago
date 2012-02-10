@@ -10,14 +10,19 @@
 #import "Board.h"
 #import "GridView.h"
 
+typedef enum {
+	GameStateNoInput,
+	GameStatePlace,
+	GameStateRotate
+} GameState;
+
 @interface GameViewController : UIViewController <GridViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, retain) Board *board;
-@property (nonatomic, retain) GridView *grid0;
-@property (nonatomic, retain) GridView *grid1;
-@property (nonatomic, retain) GridView *grid2;
-@property (nonatomic, retain) GridView *grid3;
 @property (nonatomic, retain) NSArray *grids;
+@property (nonatomic, retain) GridView *gridAnimate;
+@property (nonatomic, retain) UILabel *label;
+@property (nonatomic, assign) GameState state;
 @property (nonatomic, assign) Player turn;
 
 @end

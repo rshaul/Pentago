@@ -10,6 +10,7 @@
 #import "Player.h"
 #import "Position.h"
 #import "Cell.h"
+#import "Direction.h"
 #import "Winner.h"
 
 // Enumerates over the cells
@@ -21,6 +22,8 @@
 -(Player)playerAt:(Position)position;
 -(void)setPlayer:(Player)player at:(Position)position;
 -(void)clearBoard;
+
+-(void)rotateGrid:(int)grid direction:(Direction)direction;
 
 -(Winner)winnerAt:(Position)position;
 -(Winner)winnerAtGrid:(int)grid;

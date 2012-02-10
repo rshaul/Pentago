@@ -31,6 +31,14 @@
     return self;
 }
 
++(Board *)copyBoard:(Board *)board {
+	Board *copy = [[Board alloc] init];
+	for (Cell *cell in board) {
+		[copy setPlayer:cell.player at:cell.position];
+	}
+	return copy;
+}
+
 -(int)Length {
 	return 6;
 }
@@ -48,6 +56,9 @@
 -(Player)playerAt:(Position)position {
 	return [[self cellAt:position] player];
 }
+-(void)setPlayer:(Player)player atRow:(int)row column:(int)column {
+	[[self cellAtRow:row column:column] setPlayer:player];
+}
 -(void)setPlayer:(Player)player at:(Position)position {
 	[[self cellAt:position] setPlayer:player];
 }
@@ -56,6 +67,32 @@
 		cell.player = PlayerNone;
 	}
 }
+
+/*
+	Rotations
+*/
+
+-(void)rotateGrid:(int)grid direction:(Direction)direction {
+	int size = 3;
+	int rowOff = (grid == 2 || grid == 3) ? size : 0;
+	int colOff = (grid == 1 || grid == 3) ? size : 0;
+	Board *copy = [Board copyBoard:self];
+	for (int row = 0; row < size; row++) {
+		for (int col = 0; col < size; col++) {
+			int rotateRow = col;
+			int rotateCol = row;
+			if (direction == DirectionLeft) {
+				rotateRow = (size-1) - rotateRow;
+			} else if (direction == DirectionRight) {
+				rotateCol = (size-1) - rotateCol;
+			}
+			Player player = [copy playerAtRow:row+rowOff column:col+colOff];
+			[self setPlayer:player atRow:rotateRow+rowOff column:rotateCol+colOff];
+		}
+	}
+	[copy release];
+}
+ 
 
 
 /*

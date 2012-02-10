@@ -58,6 +58,7 @@
 		3FC82C1714E48EEB006EA058 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
 		3FC82C1814E48EEB006EA058 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 		3FC82C1B14E48F36006EA058 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		E32C94F314E5B46A00DA3237 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
 		E3A1E20814E4DA4E0003D0F4 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		E3A1E20914E4DA4E0003D0F4 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		E3A1E20C14E4DAA60003D0F4 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
@@ -163,6 +164,7 @@
 			children = (
 				E3A1E20D14E4E0F80003D0F4 /* Winner.h */,
 				3FC82C1B14E48F36006EA058 /* Player.h */,
+				E32C94F314E5B46A00DA3237 /* Direction.h */,
 				E3A1E20C14E4DAA60003D0F4 /* Position.h */,
 				E3A1E20F14E50B250003D0F4 /* Position.m */,
 				3FC82C1714E48EEB006EA058 /* Board.h */,

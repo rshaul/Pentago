@@ -13,42 +13,66 @@
 #define PIECE_SCALE 0.9
 
 @interface GridView ()
-@property (nonatomic, retain) NSMutableArray *pieces;
+@property (nonatomic, assign) UIImageView **pieces;
+@property (nonatomic, retain) UISwipeGestureRecognizer *left;
+@property (nonatomic, retain) UISwipeGestureRecognizer *right;
 @end
 
 @implementation GridView
 @synthesize pieces = _pieces;
+@synthesize left = _left;
+@synthesize right = _right;
 @synthesize delegate = _delegate;
 
 -(void)dealloc {
-	self.pieces = nil;
+	[self removeGestureRecognizer:self.left];
+	[self removeGestureRecognizer:self.right];
+	free(self.pieces);
+	self.left = nil;
+	self.right = nil;
 	self.delegate = nil;
 	[super dealloc];
 }
 
--(id)initWithPosition:(CGPoint)point {
+-(id)initWithPosition:(CGPoint)point tag:(int)tag {
     if ((self = [super initWithFrame:CGRectMake(point.x, point.y, GRID_SIZE, GRID_SIZE)])) {
         UIImage *grid = [UIImage imageNamed:@"grid300"];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:grid];
         [self addSubview:imageView];
         [imageView release];
-		self.pieces = [NSMutableArray array];
+		
+		self.pieces = malloc(self.Length*self.Length*sizeof(UIImageView*));
+		for (int i=0; i < self.Length*self.Length; i++) self.pieces[i] = nil;
+		
+		self.tag = tag;
+		
+		self.left = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)] autorelease];
+		self.left.direction = UISwipeGestureRecognizerDirectionLeft;
+		self.right = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)] autorelease];
+		self.right.direction = UISwipeGestureRecognizerDirectionRight;
+		[self addGestureRecognizer:self.left];
+		[self addGestureRecognizer:self.right];
     }
     return self;
 }
-+(id)gridWithPosition:(CGPoint)point {
-	return [[[GridView alloc] initWithPosition:point] autorelease];
++(id)gridWithPosition:(CGPoint)point tag:(int)tag {
+	return [[[GridView alloc] initWithPosition:point tag:tag] autorelease];
 }
 
 -(int)Length {
 	return 3;
 }
 
+-(void)removePieceAtIndex:(int)index {
+	[self.pieces[index] removeFromSuperview];
+	[self.pieces[index] release];
+	self.pieces[index] = nil;	
+}
+
 -(void)clearGrid {
-	for (UIImageView *piece in self.pieces) {
-		[piece removeFromSuperview];
+	for (int i=0; i < self.Length*self.Length; i++) {
+		[self removePieceAtIndex:i];
 	}
-	[self.pieces removeAllObjects];
 }
 
 -(CGRect)frameForPieceAt:(Position)position {
@@ -57,17 +81,23 @@
 	return CGRectMake(x, y, CELL_SIZE, CELL_SIZE);
 }
 
--(void)setPlayer:(Player)player at:(Position)position {
-	if (player == PlayerNone) assert(0);
+-(int)indexForPieceAt:(Position)position {
+	return (position.row*self.Length + position.column);
+}
 
-	UIImageView *piece = [[UIImageView alloc] init];
-	piece.frame = [self frameForPieceAt:position];
-	NSString *name = (player == Player1) ? @"redMarble" : @"blueMarble";
-	piece.image = [UIImage imageNamed:name];
-	piece.transform = CGAffineTransformMakeScale(PIECE_SCALE, PIECE_SCALE);
-	[self addSubview:piece];
-	[self.pieces addObject:piece];
-	[piece release];
+-(void)setPlayer:(Player)player at:(Position)position {
+	int index = [self indexForPieceAt:position];
+	[self removePieceAtIndex:index];
+	if (player != PlayerNone) {
+		UIImageView *piece = [[UIImageView alloc] init];
+		piece.frame = [self frameForPieceAt:position];
+		NSString *name = (player == Player1) ? @"redMarble" : @"blueMarble";
+		piece.image = [UIImage imageNamed:name];
+		piece.transform = CGAffineTransformMakeScale(PIECE_SCALE, PIECE_SCALE);
+		[self addSubview:piece];
+		self.pieces[index] = [piece retain];
+		[piece release];
+	}
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -82,6 +112,12 @@
 			}
 		}
 	}
+}
+
+-(void)didSwipe:(UIGestureRecognizer *)recognizer {
+	UISwipeGestureRecognizer *swipe = (UISwipeGestureRecognizer*)recognizer;
+	Direction direction = (swipe.direction == UISwipeGestureRecognizerDirectionLeft) ? DirectionLeft : DirectionRight;
+	[self.delegate gridView:self didSwipe:direction];
 }
 
 @end
