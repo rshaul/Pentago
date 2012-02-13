@@ -19,7 +19,6 @@
 		3FC82C1C14E48F36006EA058 /* Player.h in Resources */ = {isa = PBXBuildFile; fileRef = 3FC82C1B14E48F36006EA058 /* Player.h */; };
 		E3668EF014E5C7C5006AC992 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E3668EEE14E5C7C5006AC992 /* blue.png */; };
 		E3668EF114E5C7C5006AC992 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = E3668EEF14E5C7C5006AC992 /* red.png */; };
-		E3A1E20A14E4DA4E0003D0F4 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A1E20914E4DA4E0003D0F4 /* Cell.m */; };
 		E3A1E21014E50B260003D0F4 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A1E20F14E50B250003D0F4 /* Position.m */; };
 		E3A1E21214E50F470003D0F4 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A1E21114E50F470003D0F4 /* grid.png */; };
 /* End PBXBuildFile section */
@@ -45,8 +44,6 @@
 		E32C94F314E5B46A00DA3237 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
 		E3668EEE14E5C7C5006AC992 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		E3668EEF14E5C7C5006AC992 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
-		E3A1E20814E4DA4E0003D0F4 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
-		E3A1E20914E4DA4E0003D0F4 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		E3A1E20C14E4DAA60003D0F4 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
 		E3A1E20D14E4E0F80003D0F4 /* Winner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Winner.h; sourceTree = "<group>"; };
 		E3A1E20E14E504B70003D0F4 /* GridViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewDelegate.h; sourceTree = "<group>"; };
@@ -148,8 +145,6 @@
 				E3A1E20F14E50B250003D0F4 /* Position.m */,
 				3FC82C1714E48EEB006EA058 /* Board.h */,
 				3FC82C1814E48EEB006EA058 /* Board.m */,
-				E3A1E20814E4DA4E0003D0F4 /* Cell.h */,
-				E3A1E20914E4DA4E0003D0F4 /* Cell.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -235,7 +230,6 @@
 				3F8FD1A714E35F1F00C7206B /* GameViewController.m in Sources */,
 				3F8FD1AA14E35F6B00C7206B /* GridView.m in Sources */,
 				3FC82C1914E48EEB006EA058 /* Board.m in Sources */,
-				E3A1E20A14E4DA4E0003D0F4 /* Cell.m in Sources */,
 				E3A1E21014E50B260003D0F4 /* Position.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

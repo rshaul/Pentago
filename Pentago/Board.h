@@ -9,16 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "Player.h"
 #import "Position.h"
-#import "Cell.h"
 #import "Direction.h"
 #import "Winner.h"
 
 // The complete 6x6 game board
 // Used to check for wins
-@interface Board : NSObject <NSFastEnumeration>
+@interface Board : NSObject
 
 @property (nonatomic, readonly) int Length;
-@property (nonatomic, retain) NSArray *cells;
 
 -(Player)playerAt:(Position)position;
 -(void)setPlayer:(Player)player at:(Position)position;

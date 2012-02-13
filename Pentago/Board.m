@@ -10,52 +10,44 @@
 
 #define WinCount 5
 
+@interface Board()
+@property (nonatomic, assign) Player *cells;
+@end
+
 @implementation Board
 @synthesize cells = _cells;
 
 -(void)dealloc {
-	self.cells = nil;
+	free(self.cells);
     [super dealloc];
 }
 
 -(id)init {
     if ((self = [super init])) {
-		NSMutableArray *cells = [NSMutableArray arrayWithCapacity:self.Length*self.Length];
-		for (int row=0; row < self.Length; row++) {
-			for (int col=0; col < self.Length; col++) {
-				[cells addObject:[Cell cellWithRow:row column:col player:PlayerNone]];
-			}
-		}
-		self.cells = cells;
+		self.cells = malloc(self.Length*self.Length*sizeof(Player));
+		[self clearBoard];
     }
     return self;
-}
-
-+(Board *)copyBoard:(Board *)board {
-	Board *copy = [[Board alloc] init];
-	for (Cell *cell in board) {
-		[copy setPlayer:cell.player at:cell.position];
-	}
-	return copy;
 }
 
 -(int)Length {
 	return 6;
 }
 
--(Cell*)cellAt:(Position)p {
-	return [self.cells objectAtIndex:(p.row*self.Length+p.column)];
+-(void)clearBoard {
+	for (int i=0; i < self.Length*self.Length; i++) {
+		self.cells[i] = PlayerNone;
+	}
+}
+
+-(Player*)addressOf:(Position)p {
+	return &self.cells[p.row*self.Length + p.column];
 }
 -(Player)playerAt:(Position)position {
-	return [[self cellAt:position] player];
+	return *[self addressOf:position];
 }
 -(void)setPlayer:(Player)player at:(Position)position {
-	[[self cellAt:position] setPlayer:player];
-}
--(void)clearBoard {
-	for (Cell *cell in self.cells) {
-		cell.player = PlayerNone;
-	}
+	(*[self addressOf:position]) = player;
 }
 
 
@@ -71,8 +63,8 @@ int min(int a, int b) {
 }
 
 -(BOOL)hasOpenCells {
-	for (Cell *cell in self.cells) {
-		if (cell.player == PlayerNone) return YES;
+	for (int i=0; i < self.Length*self.Length; i++) {
+		if (self.cells[i] == PlayerNone) return YES;
 	}
 	return NO;
 }
@@ -140,7 +132,6 @@ int min(int a, int b) {
 }
 
 // Check for a winner along the edge of a grid
-
 -(Winner)winnerAtGrid:(int)grid {
 	int count = 5;
 	Position *positions = malloc(count*sizeof(Position));
@@ -170,12 +161,6 @@ int min(int a, int b) {
 	}
 	free(positions);
 	return [self getWinnerP1:p1 p2:p2];
-}
-
-// NSFastEnumeration Protocol
-
--(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id [])buffer count:(NSUInteger)len {
-	return [self.cells countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 @end

@@ -24,6 +24,7 @@
 @property (nonatomic, retain) id<GridViewDelegate> delegate;
 @property (nonatomic, readonly) int Length;
 
--(void)rotate:(Direction)direction;
+// Animates
+-(void)startRotate:(Direction)direction;
 
 @end

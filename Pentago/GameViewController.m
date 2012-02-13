@@ -12,7 +12,7 @@
 #define GRID1_POS CGPointMake(397, 71)
 #define GRID2_POS CGPointMake(71, 397)
 #define GRID3_POS CGPointMake(397, 397)
-#define LABEL_FRAME CGRectMake(0, 750, 768, 100)
+#define LABEL_FRAME CGRectMake(0, 725, 768, 100)
 
 @implementation GameViewController
 @synthesize board = _board;
@@ -62,15 +62,15 @@
 	[self resetGame];
 }
 
-// Changing game state updates the label
+// Game state
 
 -(void)updateLabel {
 	NSString *player = (self.turn == Player1) ? @"Red" : @"Blue";
 	if (self.state == GameStatePlace) {
 		self.label.text = [player stringByAppendingString:@" : place a piece"];
-	} else {
+	} else if (self.state == GameStateRotate) {
 		self.label.text = [player stringByAppendingString:@" : rotate a board"];
-	}	
+	}
 }
 -(void)setState:(GameState)state {
 	_state = state;
@@ -141,7 +141,7 @@
 
 // Rotating a board
 
--(void)updateBoardFromGrid:(GridView *)grid {
+-(void)updateBoard:(GridView *)grid {
 	for (int row=0; row < grid.Length; row++) {
 		for (int col=0; col < grid.Length; col++) {
 			Position gridPosition = PositionMake(row, col);
@@ -154,11 +154,11 @@
 
 -(void)gridView:(GridView *)grid didSwipe:(Direction)direction {
 	if (self.state != GameStateRotate) return;	
-	[grid rotate:direction];
-	self.state = GameStateNoInput;
+	[grid startRotate:direction];
+	self.state = GameStateWait;
 }
 -(void)gridViewRotateDidStop:(GridView *)grid {
-	[self updateBoardFromGrid:grid];
+	[self updateBoard:grid];
 	if (![self handleWinner:[self.board winnerAtGrid:grid.tag]]) {
 		self.turn = (self.turn == Player1) ? Player2 : Player1;
 		self.state = GameStatePlace;

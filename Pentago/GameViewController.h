@@ -11,7 +11,7 @@
 #import "GridView.h"
 
 typedef enum {
-	GameStateNoInput,
+	GameStateWait,
 	GameStatePlace,
 	GameStateRotate
 } GameState;
