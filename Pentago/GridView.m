@@ -10,6 +10,10 @@
 
 #define GRID_SIZE 300
 #define CELL_SIZE 96
+#define TOP_ROW CGRectMake(3, 3, 294, 96)
+#define BOTTOM_ROW CGRectMake(3, 201, 294, 96)
+#define LEFT_COLUMN CGRectMake(3, 3, 96, 294)
+#define RIGHT_COLUMN CGRectMake(201, 3, 96, 294)
 
 @interface GridView ()
 @property (nonatomic, retain) UIImage *redImage;
@@ -41,36 +45,46 @@
 	return CGRectMake(x, y, CELL_SIZE, CELL_SIZE);
 }
 
+-(void)initPieces {
+	self.pieces = [NSMutableArray arrayWithCapacity:self.Length*self.Length];
+	for (int row=0; row < self.Length; row++) {
+		for (int col=0; col < self.Length; col++) {
+			UIImageView *view = [[UIImageView alloc] init];
+			view.frame = [self frameForPieceAt:PositionMake(row, col)];
+			[self.pieces addObject:view];
+			[self addSubview:view];
+			[view release];
+		}
+	}
+}
+
+-(void)initSwipeRecognizers {
+	int count = 4;
+	UISwipeGestureRecognizerDirection directions[count];
+	directions[0] = UISwipeGestureRecognizerDirectionLeft;
+	directions[1] = UISwipeGestureRecognizerDirectionRight;
+	directions[2] = UISwipeGestureRecognizerDirectionUp;
+	directions[3] = UISwipeGestureRecognizerDirectionDown;
+	for (int i=0; i < count; i++) {
+		UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+		swipe.direction = directions[i];
+		[self addGestureRecognizer:swipe];
+		[swipe release];
+	}
+}
+
 -(id)initWithPosition:(CGPoint)point tag:(int)tag {
     if ((self = [super initWithFrame:CGRectMake(point.x, point.y, GRID_SIZE, GRID_SIZE)])) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grid"]];
-        [self addSubview:imageView];
-        [imageView release];
-		
-		self.pieces = [NSMutableArray arrayWithCapacity:self.Length*self.Length];
-		for (int row=0; row < self.Length; row++) {
-			for (int col=0; col < self.Length; col++) {
-				UIImageView *view = [[UIImageView alloc] init];
-				view.frame = [self frameForPieceAt:PositionMake(row, col)];
-				[self.pieces addObject:view];
-				[self addSubview:view];
-				[view release];
-			}
-		}
+        UIImageView *grid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"grid"]];
+        [self addSubview:grid];
+        [grid release];
 		
 		self.tag = tag;
-		
-		UISwipeGestureRecognizer *left = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-		left.direction = UISwipeGestureRecognizerDirectionLeft;
-		UISwipeGestureRecognizer *right = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
-		right.direction = UISwipeGestureRecognizerDirectionRight;
-		[self addGestureRecognizer:left];
-		[self addGestureRecognizer:right];
-		[left release];
-		[right release];
-		
 		self.redImage = [UIImage imageNamed:@"red"];
 		self.blueImage = [UIImage imageNamed:@"blue"];
+		
+		[self initPieces];	
+		[self initSwipeRecognizers];
     }
     return self;
 }
@@ -82,10 +96,6 @@
 -(UIImageView *)pieceAt:(Position)position {
 	int index = (position.row*self.Length + position.column);
 	return [self.pieces objectAtIndex:index];
-}
-
--(void)removePieceAtIndex:(int)index {
-	[[self.pieces objectAtIndex:index] setImage:nil];
 }
 
 -(void)clearGrid {
@@ -148,10 +158,34 @@
 
 // Swipe
 
+-(BOOL)isTopRow:(CGPoint)point {
+	return CGRectContainsPoint(TOP_ROW, point);
+}
+-(BOOL)isRightColumn:(CGPoint)point {
+	return CGRectContainsPoint(RIGHT_COLUMN, point);
+}
+-(BOOL)isBottomRow:(CGPoint)point {
+	return CGRectContainsPoint(BOTTOM_ROW, point);
+}
+-(BOOL)isLeftColumn:(CGPoint)point {
+	return CGRectContainsPoint(LEFT_COLUMN, point);
+}
+
 -(void)didSwipe:(UIGestureRecognizer *)recognizer {
 	UISwipeGestureRecognizer *swipe = (UISwipeGestureRecognizer*)recognizer;
-	Direction direction = (swipe.direction == UISwipeGestureRecognizerDirectionLeft) ? DirectionCounterClockwise : DirectionClockwise;
-	[self.delegate gridView:self didSwipe:direction];
+	CGPoint point = [swipe locationInView:self];
+	UISwipeGestureRecognizerDirection direction = swipe.direction;
+	if ((direction == UISwipeGestureRecognizerDirectionLeft && [self isTopRow:point])
+		|| (direction == UISwipeGestureRecognizerDirectionRight && [self isBottomRow:point])
+		|| (direction == UISwipeGestureRecognizerDirectionUp && [self isRightColumn:point])
+		|| (direction == UISwipeGestureRecognizerDirectionDown && [self isLeftColumn:point])) {
+		[self.delegate gridView:self didSwipe:DirectionCounterClockwise];
+	} else if ((direction == UISwipeGestureRecognizerDirectionRight && [self isTopRow:point])
+			   || (direction == UISwipeGestureRecognizerDirectionLeft && [self isBottomRow:point])
+			   || (direction == UISwipeGestureRecognizerDirectionDown && [self isRightColumn:point])
+			   || (direction == UISwipeGestureRecognizerDirectionUp && [self isLeftColumn:point])) {
+		[self.delegate gridView:self didSwipe:DirectionClockwise];
+	}
 }
 
 // Rotate

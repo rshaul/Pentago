@@ -122,7 +122,7 @@ int min(int a, int b) {
 	if (p1) return WinnerPlayer1;
 	if (p2) return WinnerPlayer2;
 	if (![self hasOpenCells]) return WinnerDraw;
-	return WinnerNone;	
+	return WinnerNone;
 }
 
 -(Winner)winnerAt:(Position)position {
